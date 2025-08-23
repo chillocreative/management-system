@@ -12,15 +12,8 @@
         <nav class="border-b bg-card shadow-sm">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 justify-between items-center">
-                    <div class="flex items-center space-x-8">
-                        <a href="/" class="text-2xl font-bold text-primary">Party Management System</a>
-                        <div class="hidden md:block">
-                            <div class="flex items-center space-x-6">
-                                <a href="/" class="text-foreground hover:text-primary transition-colors font-medium">Home</a>
-                                <a href="/dashboard" class="text-muted-foreground hover:text-foreground transition-colors">Dashboard</a>
-                                <a href="/files" class="text-muted-foreground hover:text-foreground transition-colors">Files</a>
-                            </div>
-                        </div>
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-bold text-primary">Party Management System</h1>
                     </div>
                     <div class="flex items-center space-x-4">
                         <a href="/login" class="text-sm font-medium text-primary">Login</a>
