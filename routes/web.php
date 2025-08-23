@@ -41,6 +41,12 @@ Route::middleware(['auth'])->group(function () {
 // Admin-only routes
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('users', UserController::class);
+    
+    // Settings routes
+    Route::get('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('admin.settings.index');
+    Route::put('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('admin.settings.update');
+    Route::post('/admin/settings/{provider}/toggle', [App\Http\Controllers\Admin\SettingsController::class, 'toggleStatus'])->name('admin.settings.toggle');
+    Route::post('/admin/settings/{provider}/test', [App\Http\Controllers\Admin\SettingsController::class, 'testProvider'])->name('admin.settings.test');
 });
 
 require __DIR__.'/auth.php';

@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User - {{ $user->name }} - Management System</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        /* Toggle switch styling */
+        .toggle-switch {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .toggle-switch:focus-within {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .toggle-dot {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        
+        .toggle-container {
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .toggle-switch:hover .toggle-container {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+        
+        .toggle-switch:hover .toggle-dot {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .toggle-switch:active .toggle-dot {
+            transform: scale(0.95);
+        }
+    </style>
 </head>
 <body class="h-full bg-background text-foreground">
     <div class="min-h-full">
@@ -118,12 +152,23 @@
                                 </div>
 
                                 <div>
-                                    <label class="flex items-center space-x-2">
-                                        <input type="checkbox" name="is_verified" value="1" {{ old('is_verified', $user->is_verified) ? 'checked' : '' }}
-                                               class="rounded border-input text-primary focus:ring-ring focus:ring-offset-2">
-                                        <span class="text-sm font-medium text-foreground">Email Verified</span>
-                                    </label>
-                                    <p class="mt-1 text-xs text-muted-foreground">Check this if the user's email has been verified</p>
+                                    <label class="block text-sm font-medium text-foreground mb-3">Email Verification Status</label>
+                                    <div class="flex items-center space-x-3">
+                                        <label class="flex items-center cursor-pointer toggle-switch">
+                                            <input type="checkbox" name="is_verified" value="1" {{ old('is_verified', $user->is_verified) ? 'checked' : '' }}
+                                                   class="sr-only">
+                                            <div class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 toggle-container {{ old('is_verified', $user->is_verified) ? 'bg-green-600' : 'bg-gray-300' }}">
+                                                <span class="inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform toggle-dot {{ old('is_verified', $user->is_verified) ? 'translate-x-6' : 'translate-x-1' }}"></span>
+                                            </div>
+                                        </label>
+                                        <span class="text-sm font-medium {{ old('is_verified', $user->is_verified) ? 'text-green-600' : 'text-gray-500' }}" id="verification-status">
+                                            {{ old('is_verified', $user->is_verified) ? 'Email Verified' : 'Email Not Verified' }}
+                                        </span>
+                                        @if(old('is_verified', $user->is_verified))
+                                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse" id="verification-dot"></div>
+                                        @endif
+                                    </div>
+                                    <p class="mt-2 text-xs text-muted-foreground">Toggle to change the user's email verification status</p>
                                 </div>
                             </div>
                         </div>
@@ -142,5 +187,55 @@
             </div>
         </main>
     </div>
+
+    <script>
+        // Handle email verification toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.querySelector('input[name="is_verified"]');
+            const toggleContainer = document.querySelector('.toggle-container');
+            const toggleDot = document.querySelector('.toggle-dot');
+            const statusText = document.getElementById('verification-status');
+            const verificationDot = document.getElementById('verification-dot');
+            
+            if (toggle) {
+                toggle.addEventListener('change', function() {
+                    const isChecked = this.checked;
+                    
+                    // Update toggle appearance
+                    if (isChecked) {
+                        toggleContainer.classList.remove('bg-gray-300');
+                        toggleContainer.classList.add('bg-green-600');
+                        toggleDot.classList.remove('translate-x-1');
+                        toggleDot.classList.add('translate-x-6');
+                        statusText.textContent = 'Email Verified';
+                        statusText.classList.remove('text-gray-500');
+                        statusText.classList.add('text-green-600');
+                        
+                        // Add verification dot if it doesn't exist
+                        if (!verificationDot) {
+                            const dot = document.createElement('div');
+                            dot.className = 'w-2 h-2 bg-green-500 rounded-full animate-pulse';
+                            dot.id = 'verification-dot';
+                            statusText.parentElement.appendChild(dot);
+                        }
+                    } else {
+                        toggleContainer.classList.remove('bg-green-600');
+                        toggleContainer.classList.add('bg-gray-300');
+                        toggleDot.classList.remove('translate-x-6');
+                        toggleDot.classList.add('translate-x-1');
+                        statusText.textContent = 'Email Not Verified';
+                        statusText.classList.remove('text-green-600');
+                        statusText.classList.add('text-gray-500');
+                        
+                        // Remove verification dot
+                        const currentDot = document.getElementById('verification-dot');
+                        if (currentDot) {
+                            currentDot.remove();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
