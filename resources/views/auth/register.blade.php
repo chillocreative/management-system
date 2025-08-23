@@ -38,9 +38,8 @@
                         Create your account
                     </h2>
                     <p class="mt-2 text-center text-sm leading-6 text-muted-foreground">
-                        Or
                         <a href="/login" class="font-semibold text-primary hover:text-primary/90 transition-colors">
-                            sign in to your existing account
+                            Sign in to your existing account
                         </a>
                     </p>
                 </div>
@@ -79,48 +78,7 @@
                             </div>
                         </div>
 
-                        <!-- Social Media Sign Up -->
-                        <div class="space-y-4">
-                            <button type="button" 
-                                    class="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-colors"
-                                    onclick="handleSocialSignup('google')">
-                                <svg class="h-5 w-5" viewBox="0 0 24 24">
-                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                                    <path d="M438 -3H421.694V102.197H438V-3Z" fill="#EA4335"/>
-                                </svg>
-                                Sign up with Google
-                            </button>
-                            
-                            <button type="button" 
-                                    class="flex w-full items-center justify-center gap-3 rounded-md bg-[#1877F2] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#1877F2]/90 transition-colors"
-                                    onclick="handleSocialSignup('facebook')">
-                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                </svg>
-                                Sign up with Facebook
-                            </button>
-                            
-                            <button type="button" 
-                                    class="flex w-full items-center justify-center gap-3 rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/90 transition-colors"
-                                    onclick="handleSocialSignup('twitter')">
-                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                                </svg>
-                                Sign up with Twitter
-                            </button>
-                        </div>
 
-                        <!-- Divider -->
-                        <div class="relative my-8">
-                            <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-t border-border"></div>
-                            </div>
-                            <div class="relative flex justify-center text-sm">
-                                <span class="bg-card px-2 text-muted-foreground">Or sign up with email</span>
-                            </div>
-                        </div>
 
                         <!-- Email Registration Form -->
                         <form class="space-y-6" method="POST" action="{{ route('register') }}" id="register-form">
@@ -240,11 +198,7 @@
             }
         }
 
-        function handleSocialSignup(provider) {
-            console.log(`Initiating ${provider} signup...`);
-            // In a real app, this would redirect to the OAuth provider
-            showError(`${provider} signup is not yet implemented. Please use email signup.`);
-        }
+
 
         function showError(message) {
             const errorAlert = document.getElementById('error-alert');
