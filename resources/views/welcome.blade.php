@@ -8,33 +8,16 @@
 </head>
 <body class="h-full bg-background text-foreground">
     <div class="min-h-full">
-        <!-- Top Navigation -->
-        <nav class="border-b bg-card shadow-sm">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-16 justify-between items-center">
-                    <div class="flex items-center">
-                        <h1 class="text-2xl font-bold text-primary">Party Management System</h1>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <a href="/login" class="text-sm font-medium text-primary">Login</a>
-                        <a href="/register" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Sign Up</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+
 
         <!-- Login Form -->
         <main>
             <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div class="sm:mx-auto sm:w-full sm:max-w-md">
                     <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-foreground">
-                        Sign in to Party Management System
+                        WELCOME TO PARTY MANAGEMENT SYSTEM
                     </h2>
-                    <p class="mt-2 text-center text-sm leading-6 text-muted-foreground">
-                        <a href="/register" class="font-semibold text-primary hover:text-primary/90 transition-colors">
-                            Create a new account
-                        </a>
-                    </p>
+
                 </div>
 
                 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
