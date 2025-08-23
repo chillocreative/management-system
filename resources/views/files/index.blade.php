@@ -8,15 +8,26 @@
 </head>
 <body class="h-full bg-gray-50 dark:bg-gray-900 transition-colors">
     <div class="min-h-full flex">
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
+        
         <!-- Left Sidebar Navigation -->
-        <aside class="w-64 bg-card border-r border-border min-h-screen transition-colors">
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-transform duration-300 ease-in-out">
             <div class="p-6">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3 mb-8">
-                    <div class="h-8 w-8 rounded-lg bg-purple-600 flex items-center justify-center">
-                        <span class="text-white font-bold text-lg">MS</span>
+                <!-- Logo and Close Button -->
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="h-8 w-8 rounded-lg bg-purple-600 flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">MS</span>
+                        </div>
+                        <span class="text-xl font-bold text-card-foreground">Management System</span>
                     </div>
-                    <span class="text-xl font-bold text-card-foreground">Management System</span>
+                    <!-- Mobile Close Button -->
+                    <button id="closeSidebar" class="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
 
                 <!-- Navigation Menu -->
@@ -70,31 +81,39 @@
         </aside>
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1 flex flex-col lg:ml-0">
             <!-- Top Header -->
-            <header class="bg-card border-b border-border px-6 py-4 transition-colors">
+            <header class="bg-card border-b border-border px-4 sm:px-6 py-4 transition-colors">
                 <div class="flex items-center justify-between">
-                    <div>
-                        <h1 class="text-2xl font-bold text-foreground">File Management</h1>
-                        <p class="text-muted-foreground">Upload, organize, and manage your files</p>
-                    </div>
+                    <!-- Mobile Menu Button and Title -->
                     <div class="flex items-center space-x-4">
+                        <button id="openSidebar" class="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                        <div>
+                            <h1 class="text-xl sm:text-2xl font-bold text-foreground">File Management</h1>
+                            <p class="text-sm text-muted-foreground hidden sm:block">Upload, organize, and manage your files</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 sm:space-x-4">
                         <!-- Dark Mode Toggle -->
                         <div class="relative">
                             <button id="darkModeToggle" class="relative p-2 text-muted-foreground hover:text-foreground focus:outline-none transition-colors" title="Toggle Dark Mode">
                                 <!-- Sun Icon (Light Mode) -->
-                                <svg id="sunIcon" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg id="sunIcon" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                                 </svg>
                                 <!-- Moon Icon (Dark Mode) -->
-                                <svg id="moonIcon" class="h-6 w-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg id="moonIcon" class="h-5 w-5 sm:h-6 sm:w-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                                 </svg>
                             </button>
                         </div>
 
                         <!-- Notifications -->
-                        <div class="relative">
+                        <div class="relative hidden sm:block">
                             <button class="relative p-2 text-gray-400 hover:text-gray-600 focus:outline-none">
                                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
@@ -104,11 +123,11 @@
                         </div>
 
                         <!-- User Profile -->
-                        <div class="flex items-center space-x-3">
-                            <div class="h-10 w-10 rounded-full bg-purple-600 flex items-center justify-center">
+                        <div class="flex items-center space-x-2 sm:space-x-3">
+                            <div class="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-purple-600 flex items-center justify-center">
                                 <span class="text-white font-medium text-sm">{{ substr(auth()->user()->name, 0, 2) }}</span>
                             </div>
-                            <div class="hidden md:block">
+                            <div class="hidden sm:block">
                                 <p class="text-sm font-medium text-foreground">{{ auth()->user()->name }}</p>
                                 <p class="text-xs text-muted-foreground">{{ auth()->user()->email }}</p>
                             </div>
@@ -117,11 +136,11 @@
                         <!-- Logout Button -->
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
-                            <button type="submit" class="inline-flex items-center justify-center px-3 py-2 border border-input rounded-md text-sm font-medium text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring">
-                                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button type="submit" class="inline-flex items-center justify-center px-2 sm:px-3 py-2 border border-input rounded-md text-sm font-medium text-foreground bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring">
+                                <svg class="h-4 w-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                                 </svg>
-                                Logout
+                                <span class="hidden sm:inline">Logout</span>
                             </button>
                         </form>
                     </div>
@@ -129,20 +148,21 @@
             </header>
 
             <!-- Main Content -->
-            <main class="flex-1 p-6">
+            <main class="flex-1 p-4 sm:p-6">
                 <!-- Page Header -->
                 <div class="mb-6">
-                    <div class="flex items-center justify-between">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
                         <div>
-                            <h2 class="text-xl font-semibold text-foreground">All Files</h2>
-                            <p class="mt-1 text-muted-foreground">Manage and organize your uploaded files</p>
+                            <h2 class="text-lg sm:text-xl font-semibold text-foreground">All Files</h2>
+                            <p class="mt-1 text-sm text-muted-foreground">Manage and organize your uploaded files</p>
                         </div>
                         <div class="flex items-center space-x-3">
-                            <a href="{{ route('files.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring">
+                            <a href="{{ route('files.create') }}" class="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring w-full sm:w-auto">
                                 <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                 </svg>
-                                Upload New File
+                                <span class="hidden sm:inline">Upload New File</span>
+                                <span class="sm:hidden">Upload</span>
                             </a>
                         </div>
                     </div>
@@ -151,19 +171,19 @@
                 <!-- Files Table -->
                 <div class="bg-card rounded-lg border border-border shadow-sm">
                     <!-- Table Header -->
-                    <div class="px-6 py-4 border-b border-border">
-                        <div class="flex items-center justify-between">
+                    <div class="px-4 sm:px-6 py-4 border-b border-border">
+                        <div class="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
                             <div>
                                 <h3 class="text-lg font-semibold text-foreground">All Files</h3>
                                 <p class="text-sm text-muted-foreground">Files uploaded by all users</p>
                             </div>
-                            <div class="flex items-center space-x-3">
+                            <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-3">
                                 <!-- Search -->
                                 <div class="relative">
                                     <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
-                                    <input type="text" placeholder="Search files..." class="pl-10 pr-4 py-2 w-64 text-sm bg-background border border-input rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-0">
+                                    <input type="text" placeholder="Search files..." class="pl-10 pr-4 py-2 w-full sm:w-64 text-sm bg-background border border-input rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-0">
                                 </div>
                                 <!-- Filter Button -->
                                 <button class="inline-flex items-center justify-center px-3 py-2 border border-input rounded-md text-sm font-medium text-foreground bg-background hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-0">
@@ -176,8 +196,100 @@
                         </div>
                     </div>
                     
-                    <!-- Table Content -->
-                    <div class="overflow-x-auto">
+                    <!-- Mobile Cards View -->
+                    <div class="lg:hidden">
+                        @forelse($files as $file)
+                            <div class="p-4 border-b border-border last:border-b-0">
+                                <div class="flex items-start space-x-3">
+                                    <div class="h-12 w-12 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                                        @if($file->file_icon === 'image')
+                                            <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                        @elseif($file->file_icon === 'pdf')
+                                            <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                            </svg>
+                                        @elseif($file->file_icon === 'document')
+                                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                        @else
+                                            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                            </svg>
+                                        @endif
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="text-sm font-medium text-foreground truncate">{{ $file->title }}</div>
+                                        <div class="text-xs text-muted-foreground truncate">{{ $file->original_filename }}</div>
+                                        <div class="text-xs text-muted-foreground mt-1">
+                                            <span class="font-medium">{{ $file->user->name }}</span> • {{ $file->formatted_size }} • {{ $file->created_at->format('M d, Y') }}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2 flex-shrink-0">
+                                        <!-- View Button -->
+                                        <a href="{{ route('files.show', $file) }}" class="p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-md" title="View">
+                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                        </a>
+                                        
+                                        <!-- Download Button -->
+                                        <a href="{{ route('files.download', $file) }}" class="p-2 text-green-600 hover:text-green-900 hover:bg-green-50 rounded-md" title="Download">
+                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                            </svg>
+                                        </a>
+
+                                        @if($file->canEdit(auth()->user()))
+                                        <!-- Edit Button -->
+                                        <a href="{{ route('files.edit', $file) }}" class="p-2 text-yellow-600 hover:text-yellow-900 hover:bg-yellow-50 rounded-md" title="Edit">
+                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                        </a>
+                                        @endif
+
+                                        @if($file->canDelete(auth()->user()))
+                                        <!-- Delete Button -->
+                                        <form action="{{ route('files.destroy', $file) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this file?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-md" title="Delete">
+                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="p-8 text-center">
+                                <div class="text-muted-foreground">
+                                    <svg class="mx-auto h-12 w-12 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <h3 class="mt-2 text-sm font-medium text-foreground">No files uploaded</h3>
+                                    <p class="mt-1 text-sm text-muted-foreground">Get started by uploading your first file.</p>
+                                    <div class="mt-6">
+                                        <a href="{{ route('files.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring">
+                                            <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                            </svg>
+                                            Upload File
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforelse
+                    </div>
+                    
+                    <!-- Desktop Table View -->
+                    <div class="hidden lg:block overflow-x-auto">
                         <table class="min-w-full divide-y divide-border">
                             <thead class="bg-muted/50">
                                 <tr>
@@ -309,7 +421,7 @@
                     
                     <!-- Pagination -->
                     @if($files->hasPages())
-                        <div class="px-6 py-4 border-t border-border">
+                        <div class="px-4 sm:px-6 py-4 border-t border-border">
                             {{ $files->links() }}
                         </div>
                     @endif
@@ -351,6 +463,42 @@
                 sunIcon.classList.add('hidden');
                 moonIcon.classList.remove('hidden');
                 localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Mobile sidebar functionality
+        const openSidebar = document.getElementById('openSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+        function openMobileSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        openSidebar.addEventListener('click', openMobileSidebar);
+        closeSidebar.addEventListener('click', closeMobileSidebar);
+        mobileMenuOverlay.addEventListener('click', closeMobileSidebar);
+
+        // Close sidebar on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileSidebar();
+            }
+        });
+
+        // Close sidebar on window resize if switching to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 1024) {
+                closeMobileSidebar();
             }
         });
     </script>
